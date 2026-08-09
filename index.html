@@ -8,7 +8,8 @@
     :root {
       --primary: #0076d6;
       --primary-dark: #005bb5;
-      --success: #25D366;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
       --heart: #ef4444;
       --bg: #f8fafc;
       --card-bg: #ffffff;
@@ -21,7 +22,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO AGRANDADO (300PX DE ALTO) */
+    /* CABECERA Y LOGO EQUILIBRADO */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -29,7 +30,7 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      padding: 15px 0 10px 0;
+      padding: 10px 0;
     }
     
     .header-main-row {
@@ -39,7 +40,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
 
     .brand-logo-container {
@@ -50,11 +51,12 @@
       text-decoration: none;
     }
     
+    /* LOGO CON TAMAÑO MÁXIMO PROPORCIONADO */
     .brand-logo-img {
-      height: 300px !important;
-      max-height: 340px !important;
+      height: 90px !important;
+      max-height: 110px !important;
       width: auto !important;
-      max-width: 98vw;
+      max-width: 90vw;
       object-fit: contain;
       display: block;
       transition: transform 0.2s ease;
@@ -74,7 +76,7 @@
       border: 1px solid var(--border);
       padding: 10px 16px;
       border-radius: 24px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: bold;
       color: var(--text);
       cursor: pointer;
@@ -83,7 +85,7 @@
     .search-box { flex: 1; min-width: 160px; }
     .search-box input {
       width: 100%;
-      padding: 11px 18px;
+      padding: 10px 18px;
       border: 1px solid var(--border);
       border-radius: 24px;
       font-size: 0.9rem;
@@ -102,7 +104,7 @@
       cursor: pointer;
     }
 
-    /* BANNER CON IMAGEN DE FONDO */
+    /* BANNER PROMOCIONAL */
     .banner-container {
       max-width: 1100px;
       margin: 15px auto 0;
@@ -110,7 +112,7 @@
     }
     .main-banner {
       width: 100%;
-      height: 220px;
+      height: 180px;
       background: linear-gradient(135deg, rgba(0,118,214,0.85) 0%, rgba(0,59,109,0.85) 100%), url('banner.png') center/cover no-repeat;
       border-radius: var(--radius);
       display: flex;
@@ -122,10 +124,10 @@
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
-    .main-banner h2 { font-size: 1.8rem; margin-bottom: 8px; }
-    .main-banner p { font-size: 1rem; opacity: 0.95; }
+    .main-banner h2 { font-size: 1.6rem; margin-bottom: 6px; }
+    .main-banner p { font-size: 0.95rem; opacity: 0.95; }
 
-    /* MENÚ LATERAL (DRAWER) */
+    /* MENÚ LATERAL */
     .side-menu-overlay {
       display: none; position: fixed; top: 0; left: 0;
       width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6);
@@ -191,15 +193,33 @@
       color: white; font-size: 0.7rem; padding: 3px 8px; border-radius: 6px;
     }
 
-    .card-body { padding: 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 10px; }
-    .product-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; color: var(--text); }
+    .card-body { padding: 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 12px; }
+    .product-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; color: var(--text); min-height: 2.6em; }
     
-    /* CAJA DE PRECIOS DETALLADA */
-    .price-box { margin-top: 5px; display: flex; flex-direction: column; gap: 3px; }
-    .price-transfer { font-size: 1.35rem; font-weight: 800; color: #16a34a; }
-    .price-transfer-label { font-size: 0.75rem; color: #15803d; font-weight: 700; background: #dcfce7; padding: 2px 6px; border-radius: 4px; display: inline-block; width: fit-content; }
-    .price-list { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
-    .price-installment { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+    /* BLOQUE DE PRECIO DE TRANSFERENCIA BIEN VISIBLE */
+    .price-box {
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .price-transfer-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #15803d;
+      background: var(--success-bg);
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+    .price-transfer-amount { font-size: 1.35rem; font-weight: 800; color: #16a34a; line-height: 1.1; margin-top: 2px; }
+    .price-list-amount { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-decoration: line-through; }
+    .price-installment-text { font-size: 0.8rem; color: var(--primary); font-weight: 600; margin-top: 2px; }
 
     .btn-add-cart {
       width: 100%; background: var(--primary); color: white; border: none;
@@ -238,7 +258,7 @@
     .modal-box h2 { font-size: 1.2rem; margin-bottom: 15px; color: var(--text); }
     .modal-box input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; }
     
-    .btn-save { width: 100%; padding: 12px; background: var(--success); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+    .btn-save { width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
 
     .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .btn-remove-item { color: #ef4444; background: none; border: none; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
@@ -259,7 +279,7 @@
 
 <header>
   <div class="header-main-row">
-    <!-- LOGO GIGANTE -->
+    <!-- LOGO PROPORCIONADO -->
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
@@ -278,15 +298,15 @@
   </div>
 </header>
 
-<!-- BANNER PROMOCIONAL CON IMAGEN DE FONDO -->
+<!-- BANNER PROMOCIONAL -->
 <div class="banner-container">
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
-    <p>10% OFF por Transferencia | 3 Cuotas Sin Interés</p>
+    <p>10% OFF en Transferencias | 3 Cuotas Sin Interés</p>
   </div>
 </div>
 
-<!-- MENÚ LATERAL (DRAWER) -->
+<!-- MENÚ LATERAL -->
 <div id="side-menu-overlay" class="side-menu-overlay" onclick="toggleSideMenu()"></div>
 <div id="side-menu" class="side-menu">
   <div class="side-menu-header">
@@ -402,7 +422,7 @@
   let carritoProductos = [];
   let usuarioActual = null;
 
-  const NUMERO_WHATSAPP = '5491112345678'; // WhatsApp oficial de ALUNEY
+  const NUMERO_WHATSAPP = '5491112345678';
 
   const params = new URLSearchParams(window.location.search);
   const tiendaUrl = (params.get('tienda') || 'ALUNEY').toLowerCase();
@@ -433,7 +453,7 @@
       contenido.innerHTML = "<p>Bienvenida a <b>ALUNEY</b>. Somos apasionadas por la estética y el cuidado de la piel. Ofrecemos los mejores productos importados de Skincare y cosmética profesional.</p>";
     } else if (tipo === 'importante') {
       titulo.innerText = "ℹ️ Información Importante";
-      contenido.innerHTML = "<ul><li>💸 <b>10% OFF acumulable</b> abonando por Transferencia bancaria.</li><br><li>💳 Pagá en 3 Cuotas Sin Interés con Ualá Bis.</li><br><li>🚚 Envíos rápidos y seguros a todo el país.</li><br><li>🛡️ Productos 100% originales.</li></ul>";
+      contenido.innerHTML = "<ul><li>💸 <b>10% OFF</b> abonando por Transferencia bancaria.</li><br><li>💳 Pagá en 3 Cuotas Sin Interés con Ualá Bis.</li><br><li>🚚 Envíos rápidos a todo el país.</li><br><li>🛡️ Productos 100% originales.</li></ul>";
     } else if (tipo === 'contacto') {
       titulo.innerText = "📞 Contacto";
       contenido.innerHTML = `<p>📱 <b>WhatsApp:</b> +${NUMERO_WHATSAPP}</p><p>📧 Lunes a Sábados de 9:00 a 19:00 hs.</p>`;
@@ -444,7 +464,7 @@
   function cerrarModalInfo(e) { if (e.target.id === 'modal-info') cerrarModalInfoForce(); }
   function cerrarModalInfoForce() { document.getElementById('modal-info').classList.remove('active'); }
 
-  /* LÓGICA DE CARRITO ACUMULATIVO CON 10% OFF EN TRANSFERENCIA */
+  /* LÓGICA DE CARRITO */
   function agregarAlCarrito(prodId, e) {
     if (e) e.stopPropagation();
     const prod = todosLosProductos.find(p => p.id === prodId);
@@ -473,7 +493,7 @@
     const bar = document.getElementById('cart-float-bar');
     if (totalItems > 0) {
       document.getElementById('cart-badge-count').innerText = totalItems;
-      document.getElementById('cart-float-total').innerText = `$ ${totalTransfer.toLocaleString('es-AR')} (Transf.)`;
+      document.getElementById('cart-float-total').innerText = `$ ${totalTransfer.toLocaleString('es-AR')}`;
       bar.style.display = 'flex';
     } else {
       bar.style.display = 'none';
@@ -537,7 +557,7 @@
     const totalTransfer = Math.round(totalLista * 0.90);
     detalle += `\n*TOTAL TRANSFERENCIA (-10%): $ ${totalTransfer.toLocaleString('es-AR')}*`;
     detalle += `\nTotal Lista (o 3 Cuotas): $ ${totalLista.toLocaleString('es-AR')}`;
-    detalle += `\n\n¿Me confirman datos para el pago?`;
+    detalle += `\n\n¿Me confirman datos para abonar?`;
 
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(detalle)}`, '_blank');
   }
@@ -697,12 +717,13 @@
             <div class="product-title">${p.nombre}</div>
             
             <div class="price-box">
-              <div>
-                <span class="price-transfer-label">10% OFF TRANSFERENCIA</span>
+              <span class="price-transfer-badge">10% OFF Transferencia</span>
+              <div class="price-transfer-amount">$ ${precioTransfStr}</div>
+              <div style="margin-top: 2px;">
+                <span style="font-size:0.75rem; color:var(--text-muted);">Lista: </span>
+                <span class="price-list-amount">$ ${precioListaStr}</span>
               </div>
-              <div class="price-transfer">$ ${precioTransfStr}</div>
-              <div class="price-list">Precio de Lista: $ ${precioListaStr}</div>
-              <div class="price-installment">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMontoStr}</div>
+              <div class="price-installment-text">${p.cuotas || 3} cuotas de $ ${cuotaMontoStr}</div>
             </div>
 
             ${disponible 
