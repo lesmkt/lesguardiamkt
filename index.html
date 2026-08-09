@@ -21,7 +21,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO AGRANDADO 2 CM MÁS (300PX DE ALTO) */
+    /* CABECERA Y LOGO AGRANDADO (300PX DE ALTO) */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -50,7 +50,6 @@
       text-decoration: none;
     }
     
-    /* LOGO AGRANDADO 2 CM MÁS */
     .brand-logo-img {
       height: 300px !important;
       max-height: 340px !important;
@@ -195,8 +194,12 @@
     .card-body { padding: 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 10px; }
     .product-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; color: var(--text); }
     
-    .price-main { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
-    .price-installment { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+    /* CAJA DE PRECIOS DETALLADA */
+    .price-box { margin-top: 5px; display: flex; flex-direction: column; gap: 3px; }
+    .price-transfer { font-size: 1.35rem; font-weight: 800; color: #16a34a; }
+    .price-transfer-label { font-size: 0.75rem; color: #15803d; font-weight: 700; background: #dcfce7; padding: 2px 6px; border-radius: 4px; display: inline-block; width: fit-content; }
+    .price-list { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+    .price-installment { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
 
     .btn-add-cart {
       width: 100%; background: var(--primary); color: white; border: none;
@@ -279,7 +282,7 @@
 <div class="banner-container">
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
-    <p>3 Cuotas Sin Interés | Envíos a todo el país</p>
+    <p>10% OFF por Transferencia | 3 Cuotas Sin Interés</p>
   </div>
 </div>
 
@@ -339,9 +342,15 @@
     <h2>🛒 Mi Carrito de Compras</h2>
     <div id="cart-items-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
     
-    <div style="border-top: 1px solid var(--border); padding-top: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800;">
-      <span>Total Estimado:</span>
-      <span id="cart-modal-total" style="color: var(--primary);">$ 0</span>
+    <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px;">
+      <div style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: #16a34a;">
+        <span>Total Transferencia (-10%):</span>
+        <span id="cart-modal-total-transfer">$ 0</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
+        <span>Total Lista (o 3 Cuotas):</span>
+        <span id="cart-modal-total-lista">$ 0</span>
+      </div>
     </div>
 
     <button class="btn-save" onclick="enviarPedidoWhatsApp()">💬 Finalizar Pedido por WhatsApp</button>
@@ -424,7 +433,7 @@
       contenido.innerHTML = "<p>Bienvenida a <b>ALUNEY</b>. Somos apasionadas por la estética y el cuidado de la piel. Ofrecemos los mejores productos importados de Skincare y cosmética profesional.</p>";
     } else if (tipo === 'importante') {
       titulo.innerText = "ℹ️ Información Importante";
-      contenido.innerHTML = "<ul><li>💳 Pagá en 3 Cuotas Sin Interés con Ualá Bis.</li><br><li>🚚 Envíos rápidos y seguros a todo el país.</li><br><li>🛡️ Productos 100% originales.</li></ul>";
+      contenido.innerHTML = "<ul><li>💸 <b>10% OFF acumulable</b> abonando por Transferencia bancaria.</li><br><li>💳 Pagá en 3 Cuotas Sin Interés con Ualá Bis.</li><br><li>🚚 Envíos rápidos y seguros a todo el país.</li><br><li>🛡️ Productos 100% originales.</li></ul>";
     } else if (tipo === 'contacto') {
       titulo.innerText = "📞 Contacto";
       contenido.innerHTML = `<p>📱 <b>WhatsApp:</b> +${NUMERO_WHATSAPP}</p><p>📧 Lunes a Sábados de 9:00 a 19:00 hs.</p>`;
@@ -435,7 +444,7 @@
   function cerrarModalInfo(e) { if (e.target.id === 'modal-info') cerrarModalInfoForce(); }
   function cerrarModalInfoForce() { document.getElementById('modal-info').classList.remove('active'); }
 
-  /* LÓGICA DE CARRITO ACUMULATIVO */
+  /* LÓGICA DE CARRITO ACUMULATIVO CON 10% OFF EN TRANSFERENCIA */
   function agregarAlCarrito(prodId, e) {
     if (e) e.stopPropagation();
     const prod = todosLosProductos.find(p => p.id === prodId);
@@ -458,12 +467,13 @@
 
   function actualizarBarraCarrito() {
     const totalItems = carritoProductos.reduce((acc, item) => acc + item.cantidad, 0);
-    const totalMonto = carritoProductos.reduce((acc, item) => acc + ((item.lista || item.precio || 0) * item.cantidad), 0);
+    const totalLista = carritoProductos.reduce((acc, item) => acc + ((item.lista || item.precio || 0) * item.cantidad), 0);
+    const totalTransfer = Math.round(totalLista * 0.90);
 
     const bar = document.getElementById('cart-float-bar');
     if (totalItems > 0) {
       document.getElementById('cart-badge-count').innerText = totalItems;
-      document.getElementById('cart-float-total').innerText = `$ ${totalMonto.toLocaleString('es-AR')}`;
+      document.getElementById('cart-float-total').innerText = `$ ${totalTransfer.toLocaleString('es-AR')} (Transf.)`;
       bar.style.display = 'flex';
     } else {
       bar.style.display = 'none';
@@ -482,19 +492,21 @@
     const container = document.getElementById('cart-items-container');
     if (carritoProductos.length === 0) {
       container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Tu carrito está vacío.</p>";
-      document.getElementById('cart-modal-total').innerText = "$ 0";
+      document.getElementById('cart-modal-total-transfer').innerText = "$ 0";
+      document.getElementById('cart-modal-total-lista').innerText = "$ 0";
       return;
     }
 
-    let total = 0;
+    let totalLista = 0;
     container.innerHTML = carritoProductos.map(item => {
-      const subtotal = (item.lista || item.precio || 0) * item.cantidad;
-      total += subtotal;
+      const precioUnitario = (item.lista || item.precio || 0);
+      const subtotal = precioUnitario * item.cantidad;
+      totalLista += subtotal;
       return `
         <div class="cart-item-row">
           <div>
             <div style="font-weight:bold; font-size:0.9rem;">${item.nombre}</div>
-            <small style="color:var(--text-muted);">${item.cantidad}x $ ${(item.lista || item.precio || 0).toLocaleString('es-AR')}</small>
+            <small style="color:var(--text-muted);">${item.cantidad}x $ ${precioUnitario.toLocaleString('es-AR')}</small>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
             <span style="font-weight:bold; color:var(--primary);">$ ${subtotal.toLocaleString('es-AR')}</span>
@@ -504,7 +516,9 @@
       `;
     }).join('');
 
-    document.getElementById('cart-modal-total').innerText = `$ ${total.toLocaleString('es-AR')}`;
+    const totalTransfer = Math.round(totalLista * 0.90);
+    document.getElementById('cart-modal-total-transfer').innerText = `$ ${totalTransfer.toLocaleString('es-AR')}`;
+    document.getElementById('cart-modal-total-lista').innerText = `$ ${totalLista.toLocaleString('es-AR')}`;
   }
 
   function enviarPedidoWhatsApp() {
@@ -513,15 +527,17 @@
     let clienteTxt = usuarioActual ? `Cliente: ${usuarioActual.nombre}\nContacto: ${usuarioActual.contacto}\n` : '';
     let detalle = `¡Hola ${tiendaUrl.toUpperCase()}!\n${clienteTxt}Quisiera realizar el siguiente pedido:\n\n`;
 
-    let total = 0;
+    let totalLista = 0;
     carritoProductos.forEach(item => {
       const sub = (item.lista || item.precio || 0) * item.cantidad;
-      total += sub;
+      totalLista += sub;
       detalle += `• ${item.cantidad}x ${item.nombre} - $ ${sub.toLocaleString('es-AR')}\n`;
     });
 
-    detalle += `\n*TOTAL ESTIMADO: $ ${total.toLocaleString('es-AR')}*`;
-    detalle += `\n\n¿Me confirman stock para abonar en 3 cuotas?`;
+    const totalTransfer = Math.round(totalLista * 0.90);
+    detalle += `\n*TOTAL TRANSFERENCIA (-10%): $ ${totalTransfer.toLocaleString('es-AR')}*`;
+    detalle += `\nTotal Lista (o 3 Cuotas): $ ${totalLista.toLocaleString('es-AR')}`;
+    detalle += `\n\n¿Me confirman datos para el pago?`;
 
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(detalle)}`, '_blank');
   }
@@ -655,8 +671,13 @@
     grid.innerHTML = lista.map(p => {
       const disponible = (p.stock === undefined || p.stock > 0);
       const esFav = listaFavoritos.includes(p.id);
-      const precio = (p.lista || p.precio || 0).toLocaleString('es-AR');
-      const cuotaMonto = Math.round((p.lista || p.precio || 0) / (p.cuotas || 3)).toLocaleString('es-AR');
+      
+      const precioListaNum = (p.lista || p.precio || 0);
+      const precioTransfNum = Math.round(precioListaNum * 0.90);
+
+      const precioListaStr = precioListaNum.toLocaleString('es-AR');
+      const precioTransfStr = precioTransfNum.toLocaleString('es-AR');
+      const cuotaMontoStr = Math.round(precioListaNum / (p.cuotas || 3)).toLocaleString('es-AR');
       
       const fotos = (p.imagenes && p.imagenes.length) ? p.imagenes : [(p.imagen_url || p.imagen || p.img || '')];
       const fotoPrincipal = fotos[0] || 'https://via.placeholder.com/300?text=Sin+Foto';
@@ -674,9 +695,14 @@
 
           <div class="card-body">
             <div class="product-title">${p.nombre}</div>
+            
             <div class="price-box">
-              <div class="price-main">$ ${precio}</div>
-              <div class="price-installment">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMonto}</div>
+              <div>
+                <span class="price-transfer-label">10% OFF TRANSFERENCIA</span>
+              </div>
+              <div class="price-transfer">$ ${precioTransfStr}</div>
+              <div class="price-list">Precio de Lista: $ ${precioListaStr}</div>
+              <div class="price-installment">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMontoStr}</div>
             </div>
 
             ${disponible 
