@@ -24,7 +24,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO COMPACTO */
+    /* CABECERA Y LOGO */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -122,30 +122,25 @@
       cursor: pointer;
     }
 
-    /* BANNER PROMOCIONAL CON ACLARACIÓN DE CATÁLOGO */
+    /* CONTENEDOR DEL BANNER DE VIDEO */
     .banner-container {
       max-width: 1100px;
       margin: 15px auto 0;
       padding: 0 20px;
     }
-    .main-banner {
-      width: 100%;
-      min-height: 190px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.95) 100%), url('banner.png') center/cover no-repeat;
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      padding: 20px;
+    .banner-video-box {
+      border-radius: 16px;
+      overflow: hidden;
       box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
       border: 2px solid #fde047;
+      background: #000;
     }
-    .main-banner h2 { font-size: 1.7rem; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    .main-banner p { font-size: 0.98rem; font-weight: 600; color: #fef08a; margin-bottom: 6px; }
-    .main-banner .banner-step { font-size: 0.85rem; color: #ffffff; opacity: 0.95; background: rgba(0,0,0,0.25); padding: 6px 14px; border-radius: 12px; }
+    .banner-video-box video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+    }
 
     /* MENÚ LATERAL */
     .side-menu-overlay {
@@ -266,7 +261,7 @@
     }
     .wp-float-btn:hover { transform: scale(1.1); }
 
-    /* FOOTER / PIE DE PÁGINA */
+    /* FOOTER */
     footer {
       background: white;
       border-top: 1px solid var(--border);
@@ -355,7 +350,6 @@
         <input type="text" id="input-search" placeholder="Buscar productos..." oninput="filtrarProductos()">
       </div>
 
-      <!-- SELECTOR PARA ORDENAR POR PRECIO -->
       <div class="sort-box">
         <select id="select-sort" onchange="filtrarProductos()">
           <option value="relevancia">Ordenar por</option>
@@ -371,21 +365,20 @@
   </div>
 </header>
 
-<!-- BANNER PROMOCIONAL -->
 <div class="banner-container">
-  <div class="main-banner">
-    <h2>✨ ALUNEY Skincare & Estética</h2>
-    <p>10% OFF por Transferencia Bancaria | 3 Cuotas Sin Interés</p>
-    <div class="banner-step">📲 Catálogo Online: armá tu orden y la finalizamos por WhatsApp confirmando stock y link de pago</div>
+  <div class="banner-video-box">
+    <video autoplay loop muted playsinline>
+      <source src="White Minimalist Skin Care Product Banner Landscape.mp4" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
+    </video>
   </div>
 </div>
 
-<!-- MENÚ LATERAL -->
 <div id="side-menu-overlay" class="side-menu-overlay" onclick="toggleSideMenu()"></div>
 <div id="side-menu" class="side-menu">
   <div class="side-menu-header">
     <h3>ALUNEY</h3>
-    <button class="btn-close-menu" onclick="toggleSideMenu()">&times;</button>
+    <button class="btn-close-menu" onclick="toggleSideMenu()">×</button>
   </div>
   
   <ul class="menu-list">
@@ -420,7 +413,6 @@
   </div>
 </div>
 
-<!-- PIE DE PÁGINA / FOOTER NUESTRAS REDES Y EXPLICACIÓN -->
 <footer>
   <p class="footer-title">Nuestras Redes</p>
   <p class="footer-sub">Este sitio funciona como un <b>Catálogo Online</b>. Al armar tu pedido se genera una orden de compra que se envía por WhatsApp para confirmar stock y brindarte el link de pago o datos de transferencia.</p>
@@ -435,12 +427,10 @@
   </div>
 </footer>
 
-<!-- BOTÓN FLOTANTE PERMANENTE DE WHATSAPP -->
 <a href="https://wa.me/5491112345678" target="_blank" class="wp-float-btn" title="Contactar por WhatsApp">
   💬
 </a>
 
-<!-- BARRA FLOTANTE DE CARRITO -->
 <div id="cart-float-bar" class="cart-float-bar" style="display:none;" onclick="abrirModalCarrito()">
   <div>
     <span id="cart-badge-count" class="cart-badge-count">0</span>
@@ -449,10 +439,9 @@
   <div style="font-size: 1.1rem; font-weight: 800; color: #fef08a;" id="cart-float-total">$ 0</div>
 </div>
 
-<!-- MODAL DEL CARRITO DE COMPRAS -->
 <div id="modal-carrito" class="modal-overlay" onclick="cerrarModalCarrito(event)">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModalCarritoForce()">&times;</button>
+    <button class="modal-close" onclick="cerrarModalCarritoForce()">×</button>
     <h2>🛒 Mi Orden de Compra</h2>
     <div id="cart-items-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
     
@@ -473,10 +462,9 @@
   </div>
 </div>
 
-<!-- MODAL LOGIN / PERFIL -->
 <div id="modal-login" class="modal-overlay" onclick="cerrarModalLogin(event)">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModalLoginForce()">&times;</button>
+    <button class="modal-close" onclick="cerrarModalLoginForce()">×</button>
     <h2>👤 Mi Perfil de Cliente</h2>
     <div id="form-login-fields">
       <input type="text" id="user-name" placeholder="Tu Nombre y Apellido">
@@ -491,23 +479,21 @@
   </div>
 </div>
 
-<!-- MODAL INFO -->
 <div id="modal-info" class="modal-overlay" onclick="cerrarModalInfo(event)">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModalInfoForce()">&times;</button>
+    <button class="modal-close" onclick="cerrarModalInfoForce()">×</button>
     <h2 id="info-modal-title">Info</h2>
     <div id="info-modal-content" style="font-size:0.95rem; line-height:1.5;"></div>
   </div>
 </div>
 
-<!-- LIGHTBOX PARA AMPLIAR FOTOS -->
 <div id="lightbox-overlay" class="modal-overlay" onclick="cerrarLightbox(event)">
-  <button class="lightbox-close" onclick="cerrarLightboxForce()">&times;</button>
-  <button id="lightbox-prev-btn" class="lightbox-nav lightbox-prev" onclick="navegarLightbox(-1, event)">&#10094;</button>
+  <button class="lightbox-close" onclick="cerrarLightboxForce()">×</button>
+  <button id="lightbox-prev-btn" class="lightbox-nav lightbox-prev" onclick="navegarLightbox(-1, event)">❮</button>
   <div class="lightbox-content" onclick="event.stopPropagation()">
     <img id="lightbox-img-target" class="lightbox-img" src="" alt="Foto ampliada">
   </div>
-  <button id="lightbox-next-btn" class="lightbox-nav lightbox-next" onclick="navegarLightbox(1, event)">&#10095;</button>
+  <button id="lightbox-next-btn" class="lightbox-nav lightbox-next" onclick="navegarLightbox(1, event)">❯</button>
   <div id="lightbox-caption-text" class="lightbox-caption"></div>
 </div>
 
@@ -521,382 +507,4 @@
   const NUMERO_WHATSAPP = '5491112345678';
   const INSTAGRAM_URL = 'https://instagram.com/aluney.estetica';
 
-  const params = new URLSearchParams(window.location.search);
-  const tiendaUrl = (params.get('tienda') || 'ALUNEY').toLowerCase();
-
-  document.addEventListener('DOMContentLoaded', () => {
-    cargarUsuario();
-    cargarCatalogo();
-  });
-
-  /* MENÚ LATERAL Y SECCIONES */
-  function toggleSideMenu() {
-    document.getElementById('side-menu-overlay').classList.toggle('active');
-    document.getElementById('side-menu').classList.toggle('active');
-  }
-
-  function toggleSubMenuTienda() {
-    document.getElementById('sub-menu-tienda').classList.toggle('active');
-  }
-
-  function mostrarSeccionInfo(tipo) {
-    toggleSideMenu();
-    const modal = document.getElementById('modal-info');
-    const titulo = document.getElementById('info-modal-title');
-    const contenido = document.getElementById('info-modal-content');
-
-    if (tipo === 'nosotros') {
-      titulo.innerText = "🌸 Sobre Nosotros";
-      contenido.innerHTML = "<p>Bienvenida a <b>ALUNEY</b>. Somos apasionadas por la estética y el cuidado de la piel. Ofrecemos los mejores productos importados de Skincare y cosmética profesional para potenciar tu belleza natural.</p>";
-    } else if (tipo === 'importante') {
-      titulo.innerText = "ℹ️ Información Importante";
-      contenido.innerHTML = `
-        <p style="margin-bottom: 8px;">💸 <b>10% OFF</b> abonando por Transferencia Bancaria.</p>
-        <p style="margin-bottom: 8px;">💳 Pagá en <b>3 Cuotas Sin Interés</b> con todas las tarjetas.</p>
-        <p style="margin-bottom: 8px;">🚚 Envíos <b>A TODO EL PAÍS</b>.</p>
-        <p style="margin-bottom: 8px;">🛡️ Productos <b>APROBADOS POR ANMAT</b>.</p>
-        <p style="margin-bottom: 12px; font-size:0.85rem; color:var(--text-muted);">⏱️ Demora de despacho de 7 días apróx.</p>
-        <p style="padding: 8px; background: #f1f5f9; border-radius: 6px; font-size: 0.85rem;">📲 <b>¿Cómo comprar?</b> La web funciona como catálogo online: agregás tus productos al carrito, generás tu orden y la enviás por WhatsApp donde confirmamos el stock y te pasamos el link de pago o CBU.</p>
-      `;
-    } else if (tipo === 'contacto') {
-      titulo.innerText = "📞 Contacto";
-      contenido.innerHTML = `
-        <p style="margin-bottom: 10px;">📱 <b>WhatsApp:</b> <a href="https://wa.me/${NUMERO_WHATSAPP}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">+${NUMERO_WHATSAPP}</a></p>
-        <p style="margin-bottom: 10px;">📸 <b>Instagram:</b> <a href="${INSTAGRAM_URL}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">@aluney.estetica</a></p>
-        <p style="font-size:0.85rem; color:var(--text-muted);">📧 Atención online: Lunes a Sábados de 9:00 a 19:00 hs.</p>
-      `;
-    }
-    modal.classList.add('active');
-  }
-
-  function cerrarModalInfo(e) { if (e.target.id === 'modal-info') cerrarModalInfoForce(); }
-  function cerrarModalInfoForce() { document.getElementById('modal-info').classList.remove('active'); }
-
-  /* LÓGICA DE CARRITO */
-  function agregarAlCarrito(prodId, e) {
-    if (e) e.stopPropagation();
-    const prod = todosLosProductos.find(p => p.id === prodId);
-    if (!prod) return;
-
-    const exist = carritoProductos.find(item => item.id === prodId);
-    if (exist) {
-      exist.cantidad++;
-    } else {
-      carritoProductos.push({ ...prod, cantidad: 1 });
-    }
-    actualizarBarraCarrito();
-  }
-
-  function quitarDelCarrito(prodId) {
-    carritoProductos = carritoProductos.filter(item => item.id !== prodId);
-    actualizarBarraCarrito();
-    renderizarCarritoModal();
-  }
-
-  function obtenerPrecioNumerico(p) {
-    let raw = p.lista !== undefined ? p.lista : (p.precio !== undefined ? p.precio : 0);
-    if (typeof raw === 'string') {
-      raw = raw.replace(/\./g, '').replace(',', '.').replace(/[^0-9.]/g, '');
-    }
-    return parseFloat(raw) || 0;
-  }
-
-  function actualizarBarraCarrito() {
-    const totalItems = carritoProductos.reduce((acc, item) => acc + item.cantidad, 0);
-    const totalLista = carritoProductos.reduce((acc, item) => acc + (obtenerPrecioNumerico(item) * item.cantidad), 0);
-    const totalTransfer = Math.round(totalLista * 0.90);
-
-    const bar = document.getElementById('cart-float-bar');
-    if (totalItems > 0) {
-      document.getElementById('cart-badge-count').innerText = totalItems;
-      document.getElementById('cart-float-total').innerText = `$ ${totalTransfer.toLocaleString('es-AR')}`;
-      bar.style.display = 'flex';
-    } else {
-      bar.style.display = 'none';
-    }
-  }
-
-  function abrirModalCarrito() {
-    renderizarCarritoModal();
-    document.getElementById('modal-carrito').classList.add('active');
-  }
-
-  function cerrarModalCarrito(e) { if (e.target.id === 'modal-carrito') cerrarModalCarritoForce(); }
-  function cerrarModalCarritoForce() { document.getElementById('modal-carrito').classList.remove('active'); }
-
-  function renderizarCarritoModal() {
-    const container = document.getElementById('cart-items-container');
-    if (carritoProductos.length === 0) {
-      container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Tu carrito está vacío.</p>";
-      document.getElementById('cart-modal-total-transfer').innerText = "$ 0";
-      document.getElementById('cart-modal-total-lista').innerText = "$ 0";
-      return;
-    }
-
-    let totalLista = 0;
-    container.innerHTML = carritoProductos.map(item => {
-      const precioUnitario = obtenerPrecioNumerico(item);
-      const subtotal = precioUnitario * item.cantidad;
-      totalLista += subtotal;
-      return `
-        <div class="cart-item-row">
-          <div>
-            <div style="font-weight:bold; font-size:0.9rem;">${item.nombre}</div>
-            <small style="color:var(--text-muted);">${item.cantidad}x $ ${precioUnitario.toLocaleString('es-AR')}</small>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span style="font-weight:bold; color:var(--primary-dark);">$ ${subtotal.toLocaleString('es-AR')}</span>
-            <button class="btn-remove-item" onclick="quitarDelCarrito(${item.id})">&times;</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    const totalTransfer = Math.round(totalLista * 0.90);
-    document.getElementById('cart-modal-total-transfer').innerText = `$ ${totalTransfer.toLocaleString('es-AR')}`;
-    document.getElementById('cart-modal-total-lista').innerText = `$ ${totalLista.toLocaleString('es-AR')}`;
-  }
-
-  function enviarPedidoWhatsApp() {
-    if (carritoProductos.length === 0) return alert("Agrega productos al carrito primero.");
-    
-    let clienteTxt = usuarioActual ? `Cliente: ${usuarioActual.nombre}\nContacto: ${usuarioActual.contacto}\n` : '';
-    let detalle = `¡Hola ${tiendaUrl.toUpperCase()}!\n${clienteTxt}Quisiera consultar stock y confirmar la siguiente orden de compra:\n\n`;
-
-    let totalLista = 0;
-    carritoProductos.forEach(item => {
-      const sub = obtenerPrecioNumerico(item) * item.cantidad;
-      totalLista += sub;
-      detalle += `• ${item.cantidad}x ${item.nombre} - $ ${sub.toLocaleString('es-AR')}\n`;
-    });
-
-    const totalTransfer = Math.round(totalLista * 0.90);
-    detalle += `\n*TOTAL TRANSFERENCIA (-10%): $ ${totalTransfer.toLocaleString('es-AR')}*`;
-    detalle += `\nTotal Tarjeta / Lista: $ ${totalLista.toLocaleString('es-AR')}`;
-    detalle += `\n\n¿Me confirman stock para enviarme el link de pago o datos de transferencia?`;
-
-    window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(detalle)}`, '_blank');
-  }
-
-  /* LÓGICA DE USUARIOS Y FAVS */
-  function cargarUsuario() {
-    const rawUser = localStorage.getItem(`leslab_user_${tiendaUrl}`);
-    if (rawUser) {
-      usuarioActual = JSON.parse(rawUser);
-      document.getElementById('txt-login-header').innerText = usuarioActual.nombre.split(' ')[0];
-    } else {
-      document.getElementById('txt-login-header').innerText = 'Ingresar';
-    }
-    cargarFavoritos();
-  }
-
-  function abrirModalLogin() {
-    if (usuarioActual) {
-      document.getElementById('display-user-name').innerText = usuarioActual.nombre;
-      document.getElementById('display-user-contact').innerText = usuarioActual.contacto;
-      document.getElementById('form-login-fields').style.display = 'none';
-      document.getElementById('user-logged-info').style.display = 'block';
-    } else {
-      document.getElementById('form-login-fields').style.display = 'block';
-      document.getElementById('user-logged-info').style.display = 'none';
-    }
-    document.getElementById('modal-login').classList.add('active');
-  }
-
-  function cerrarModalLogin(e) { if (e.target.id === 'modal-login') cerrarModalLoginForce(); }
-  function cerrarModalLoginForce() { document.getElementById('modal-login').classList.remove('active'); }
-
-  function guardarUsuario() {
-    const name = document.getElementById('user-name').value.trim();
-    const contact = document.getElementById('user-contact').value.trim();
-    if (!name) return alert('Por favor escribe tu Nombre.');
-
-    usuarioActual = { nombre: name, contacto: contact };
-    localStorage.setItem(`leslab_user_${tiendaUrl}`, JSON.stringify(usuarioActual));
-    document.getElementById('txt-login-header').innerText = name.split(' ')[0];
-    cerrarModalLoginForce();
-    cargarFavoritos();
-  }
-
-  function cerrarSesionUsuario() {
-    localStorage.removeItem(`leslab_user_${tiendaUrl}`);
-    usuarioActual = null;
-    document.getElementById('txt-login-header').innerText = 'Ingresar';
-    cerrarModalLoginForce();
-    cargarFavoritos();
-    filtrarProductos();
-  }
-
-  function getFavKey() {
-    const idUser = usuarioActual ? usuarioActual.nombre.toLowerCase().replace(/\s+/g, '_') : 'guest';
-    return `leslab_favs_${tiendaUrl}_${idUser}`;
-  }
-
-  function cargarFavoritos() {
-    const rawFavs = localStorage.getItem(getFavKey());
-    listaFavoritos = rawFavs ? JSON.parse(rawFavs) : [];
-    renderizarCategorias();
-  }
-
-  function toggleFavorito(prodId, e) {
-    if (e) e.stopPropagation();
-    const index = listaFavoritos.indexOf(prodId);
-    if (index === -1) { listaFavoritos.push(prodId); } else { listaFavoritos.splice(index, 1); }
-    localStorage.setItem(getFavKey(), JSON.stringify(listaFavoritos));
-    renderizarCategorias();
-    filtrarProductos();
-  }
-
-  async function cargarCatalogo() {
-    try {
-      const resp = await fetch('productos.json?v=' + new Date().getTime());
-      if (!resp.ok) throw new Error("No se pudo cargar productos.json");
-      const data = await resp.json();
-      todosLosProductos = data.filter(p => p.tienda && p.tienda.toLowerCase() === tiendaUrl);
-
-      renderizarCategorias();
-      filtrarProductos();
-    } catch (err) {
-      document.getElementById('grid-productos').innerHTML = `<div class="empty-msg">⚠️ No se pudieron cargar los productos.</div>`;
-    }
-  }
-
-  function renderizarCategorias() {
-    const contenedor = document.getElementById('lista-categorias-menu');
-    const categorias = [...new Set(todosLosProductos.map(p => p.categoria || p.seccion || 'General'))];
-
-    contenedor.innerHTML = categorias.map(cat => `
-      <li class="sub-menu-item" onclick="seleccionarCategoria('${cat}')">• ${cat}</li>
-    `).join('');
-  }
-
-  function seleccionarCategoria(cat) {
-    categoriaActual = cat;
-    if (document.getElementById('side-menu').classList.contains('active')) {
-      toggleSideMenu();
-    }
-    filtrarProductos();
-  }
-
-  /* FILTRADO Y ORDENADO POR PRECIO ROBUSTO */
-  function filtrarProductos() {
-    const query = document.getElementById('input-search').value.toLowerCase().trim();
-    const modoOrden = document.getElementById('select-sort').value;
-
-    let filtrados = todosLosProductos.filter(p => {
-      let coincideCat = false;
-      if (categoriaActual === 'Todas') {
-        coincideCat = true;
-      } else if (categoriaActual === 'Favoritos') {
-        coincideCat = listaFavoritos.includes(p.id);
-      } else {
-        coincideCat = (p.categoria === categoriaActual || p.seccion === categoriaActual);
-      }
-      const coincideBusqueda = (p.nombre || '').toLowerCase().includes(query);
-      return coincideCat && coincideBusqueda;
-    });
-
-    if (modoOrden === 'precio-menor') {
-      filtrados.sort((a, b) => obtenerPrecioNumerico(a) - obtenerPrecioNumerico(b));
-    } else if (modoOrden === 'precio-mayor') {
-      filtrados.sort((a, b) => obtenerPrecioNumerico(b) - obtenerPrecioNumerico(a));
-    }
-
-    renderizarGrid(filtrados);
-  }
-
-  function renderizarGrid(lista) {
-    const grid = document.getElementById('grid-productos');
-    if (lista.length === 0) {
-      grid.innerHTML = `<div class="empty-msg">No se encontraron productos en esta sección.</div>`;
-      return;
-    }
-
-    grid.innerHTML = lista.map(p => {
-      const disponible = (p.stock === undefined || p.stock > 0);
-      const esFav = listaFavoritos.includes(p.id);
-      
-      const precioBaseNum = obtenerPrecioNumerico(p);
-      const precioTransfNum = Math.round(precioBaseNum * 0.90);
-
-      const precioBaseStr = precioBaseNum.toLocaleString('es-AR');
-      const precioTransfStr = precioTransfNum.toLocaleString('es-AR');
-      const cuotaMontoStr = Math.round(precioBaseNum / (p.cuotas || 3)).toLocaleString('es-AR');
-      
-      const fotos = (p.imagenes && p.imagenes.length) ? p.imagenes : [(p.imagen_url || p.imagen || p.img || '')];
-      const fotoPrincipal = fotos[0] || 'https://via.placeholder.com/300?text=Sin+Foto';
-      const fotosJSON = JSON.stringify(fotos).replace(/"/g, '&quot;');
-
-      return `
-        <div class="card">
-          <div class="img-wrapper">
-            <button class="btn-fav ${esFav ? 'active' : ''}" onclick="toggleFavorito(${p.id}, event)">
-              ${esFav ? '♥' : '♡'}
-            </button>
-            <img src="${fotoPrincipal}" alt="${p.nombre}" onclick="abrirFotoAmpliada(${fotosJSON})">
-            <span class="badge-cat">${p.categoria || p.seccion || 'Skincare'}</span>
-          </div>
-
-          <div class="card-body">
-            <div class="product-title">${p.nombre}</div>
-            
-            <div class="price-box">
-              <div class="price-main-amount">$ ${precioBaseStr}</div>
-              <div class="price-installment-text">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMontoStr}</div>
-              <div class="price-transfer-text">$ ${precioTransfStr} pagando por transferencia (10% OFF)</div>
-            </div>
-
-            ${disponible 
-              ? `<button class="btn-add-cart" onclick="agregarAlCarrito(${p.id}, event)">🛒 Agregar al Carrito</button>`
-              : `<button class="btn-add-cart" style="background:#cbd5e1;" disabled>Agotado</button>`
-            }
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  /* VISOR LIGHTBOX */
-  let lightboxGaleria = [];
-  let lightboxIndex = 0;
-
-  function abrirFotoAmpliada(fotos, indexInicial = 0) {
-    if (!fotos || fotos.length === 0) return;
-    lightboxGaleria = Array.isArray(fotos) ? fotos : [fotos];
-    lightboxIndex = indexInicial;
-    actualizarLightbox();
-    document.getElementById('lightbox-overlay').classList.add('active');
-  }
-
-  function actualizarLightbox() {
-    const imgEl = document.getElementById('lightbox-img-target');
-    const txtEl = document.getElementById('lightbox-caption-text');
-    const btnPrev = document.getElementById('lightbox-prev-btn');
-    const btnNext = document.getElementById('lightbox-next-btn');
-
-    imgEl.src = lightboxGaleria[lightboxIndex];
-    if (lightboxGaleria.length > 1) {
-      txtEl.innerText = `Imagen ${lightboxIndex + 1} de ${lightboxGaleria.length}`;
-      btnPrev.style.display = 'flex';
-      btnNext.style.display = 'flex';
-    } else {
-      txtEl.innerText = 'Haz clic fuera o en la X para cerrar';
-      btnPrev.style.display = 'none';
-      btnNext.style.display = 'none';
-    }
-  }
-
-  function navegarLightbox(dir, e) {
-    if (e) e.stopPropagation();
-    lightboxIndex += dir;
-    if (lightboxIndex < 0) lightboxIndex = lightboxGaleria.length - 1;
-    if (lightboxIndex >= lightboxGaleria.length) lightboxIndex = 0;
-    actualizarLightbox();
-  }
-
-  function cerrarLightbox(e) { if (e.target.id === 'modal-overlay') cerrarLightboxForce(); }
-  function cerrarLightboxForce() { document.getElementById('modal-overlay').classList.remove('active'); }
-</script>
-
-</body>
-</html>
+  const params =
