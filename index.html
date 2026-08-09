@@ -30,7 +30,7 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      padding: 5px 0 10px 0; /* Padding reducido al mínimo */
+      padding: 5px 0 10px 0;
     }
     
     .header-main-row {
@@ -52,7 +52,6 @@
       padding: 0;
     }
     
-    /* LOGO AJUSTADO SIN MÁRGENES EXTRA */
     .brand-logo-img {
       height: 180px !important;
       max-height: 220px !important;
@@ -265,7 +264,6 @@
 
 <header>
   <div class="header-main-row">
-    <!-- LOGO SIN ESPACIOS SOBRANTES -->
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
@@ -439,7 +437,13 @@
       contenido.innerHTML = "<p>Bienvenida a <b>ALUNEY</b>. Somos apasionadas por la estética y el cuidado de la piel. Ofrecemos los mejores productos importados de Skincare y cosmética profesional.</p>";
     } else if (tipo === 'importante') {
       titulo.innerText = "ℹ️ Información Importante";
-      contenido.innerHTML = "<ul><li>💸 <b>10% OFF</b> abonando por Transferencia bancaria.</li><br><li>💳 Pagá en 3 Cuotas Sin Interés con Ualá Bis.</li><br><li>🚚 Envíos rápidos a todo el país.</li><br><li>🛡️ Productos 100% originales.</li></ul>";
+      contenido.innerHTML = `
+        <p style="margin-bottom: 8px;">💸 <b>10% OFF</b> abonando por Transferencia Bancaria.</p>
+        <p style="margin-bottom: 8px;">💳 Pagá en <b>3 Cuotas Sin Interés</b> con todas las tarjetas.</p>
+        <p style="margin-bottom: 8px;">🚚 Envíos <b>A TODO EL PAÍS</b>.</p>
+        <p style="margin-bottom: 12px;">🛡️ Productos <b>APROBADOS POR ANMAT</b>.</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); italic;">Demora de despacho de 7 días apróx.</p>
+      `;
     } else if (tipo === 'contacto') {
       titulo.innerText = "📞 Contacto";
       contenido.innerHTML = `<p>📱 <b>WhatsApp:</b> +${NUMERO_WHATSAPP}</p><p>📧 Lunes a Sábados de 9:00 a 19:00 hs.</p>`;
@@ -667,7 +671,6 @@
     renderizarGrid(filtrados);
   }
 
-  /* RENDER DE TARJETAS DE PRODUCTO SEGÚN EL ORDEN DE PRECIOS SOLICITADO */
   function renderizarGrid(lista) {
     const grid = document.getElementById('grid-productos');
     if (lista.length === 0) {
@@ -704,13 +707,8 @@
             <div class="product-title">${p.nombre}</div>
             
             <div class="price-box">
-              <!-- 1. PRECIO PRINCIPAL (SÓLO EL MONTO) -->
               <div class="price-main-amount">$ ${precioBaseStr}</div>
-              
-              <!-- 2. CUOTAS SIN INTERÉS DEBAJO -->
               <div class="price-installment-text">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMontoStr}</div>
-              
-              <!-- 3. PRECIO POR TRANSFERENCIA EN VERDE CON 10% OFF -->
               <div class="price-transfer-text">$ ${precioTransfStr} pagando por transferencia (10% OFF)</div>
             </div>
 
@@ -763,7 +761,7 @@
   }
 
   function cerrarLightbox(e) { if (e.target.id === 'modal-overlay') cerrarLightboxForce(); }
-  function cerrarLightboxForce() { document.getElementById('lightbox-overlay').classList.remove('active'); }
+  function cerrarLightboxForce() { document.getElementById('modal-overlay').classList.remove('active'); }
 </script>
 
 </body>
