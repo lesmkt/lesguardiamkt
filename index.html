@@ -21,7 +21,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO GIGANTE */
+    /* CABECERA Y LOGO AGRANDADO */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -50,10 +50,10 @@
       text-decoration: none;
     }
     
-    /* LOGO GIGANTE Y BIEN VISIBLE */
+    /* LOGO AGRANDADO (~1 CM MÁS ALTO) */
     .brand-logo-img {
-      height: 160px !important;
-      max-height: 200px !important;
+      height: 200px !important;
+      max-height: 240px !important;
       width: auto !important;
       max-width: 95vw;
       object-fit: contain;
@@ -103,7 +103,7 @@
       cursor: pointer;
     }
 
-    /* BANNER PROMOCIONAL */
+    /* BANNER CON IMAGEN DE FONDO */
     .banner-container {
       max-width: 1100px;
       margin: 15px auto 0;
@@ -111,8 +111,8 @@
     }
     .main-banner {
       width: 100%;
-      height: 160px;
-      background: linear-gradient(135deg, #0076d6 0%, #003b6d 100%);
+      height: 220px;
+      background: linear-gradient(135deg, rgba(0,118,214,0.85) 0%, rgba(0,59,109,0.85) 100%), url('banner.png') center/cover no-repeat;
       border-radius: var(--radius);
       display: flex;
       flex-direction: column;
@@ -121,10 +121,10 @@
       color: white;
       text-align: center;
       padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,118,214,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
     .main-banner h2 { font-size: 1.8rem; margin-bottom: 8px; }
-    .main-banner p { font-size: 1rem; opacity: 0.9; }
+    .main-banner p { font-size: 1rem; opacity: 0.95; }
 
     /* MENÚ LATERAL (DRAWER) */
     .side-menu-overlay {
@@ -205,7 +205,7 @@
     }
     .btn-add-cart:hover { background: var(--primary-dark); }
 
-    /* BARRA FLOTANTE DE CARRITO DE COMPRAS */
+    /* BARRA FLOTANTE DE CARRITO */
     .cart-float-bar {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
       width: 90%; max-width: 500px; background: #0f172a; color: white;
@@ -220,7 +220,7 @@
       padding: 4px 10px; font-weight: bold; font-size: 0.85rem; margin-right: 8px;
     }
 
-    /* MODALES Y VISOR LIGHTBOX */
+    /* MODALES Y LIGHTBOX */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0;
       width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.8);
@@ -256,7 +256,7 @@
 
 <header>
   <div class="header-main-row">
-    <!-- LOGO GIGANTE Y DESTACADO -->
+    <!-- LOGO GIGANTE -->
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
@@ -275,7 +275,7 @@
   </div>
 </header>
 
-<!-- BANNER PROMOCIONAL -->
+<!-- BANNER PROMOCIONAL CON IMAGEN DE FONDO -->
 <div class="banner-container">
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
@@ -727,7 +727,7 @@
     actualizarLightbox();
   }
 
-  function cerrarLightbox(e) { if (e.target.id === 'lightbox-overlay') cerrarLightboxForce(); }
+  function cerrarLightbox(e) { if (e.target.id === 'modal-overlay') cerrarLightboxForce(); }
   function cerrarLightboxForce() { document.getElementById('lightbox-overlay').classList.remove('active'); }
 </script>
 
