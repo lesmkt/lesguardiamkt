@@ -10,11 +10,10 @@
       --primary-dark: #7c3aed;    /* Lila oscuro */
       --primary-light: #f5f3ff;   /* Fondo lila suave */
       --accent: #f59e0b;          /* Amarillo/Dorado */
-      --accent-hover: #d97706;
       --success: #16a34a;
       --success-bg: #dcfce7;
       --heart: #ef4444;
-      --bg: #faf5ff;              /* Fondo lila muy tenue */
+      --bg: #faf5ff;              /* Fondo lila tenue */
       --card-bg: #ffffff;
       --text: #1e293b;
       --text-muted: #64748b;
@@ -25,7 +24,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO */
+    /* CABECERA Y LOGO COMPACTO */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -123,7 +122,7 @@
       cursor: pointer;
     }
 
-    /* BANNER PROMOCIONAL LILA Y AMARILLO */
+    /* BANNER PROMOCIONAL CON ACLARACIÓN DE CATÁLOGO */
     .banner-container {
       max-width: 1100px;
       margin: 15px auto 0;
@@ -131,7 +130,7 @@
     }
     .main-banner {
       width: 100%;
-      height: 180px;
+      min-height: 190px;
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(124, 58, 237, 0.95) 100%), url('banner.png') center/cover no-repeat;
       border-radius: var(--radius);
       display: flex;
@@ -142,10 +141,11 @@
       text-align: center;
       padding: 20px;
       box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
-      border: 2px solid #fde047; /* Toque amarillo */
+      border: 2px solid #fde047;
     }
     .main-banner h2 { font-size: 1.7rem; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    .main-banner p { font-size: 1rem; font-weight: 600; color: #fef08a; }
+    .main-banner p { font-size: 0.98rem; font-weight: 600; color: #fef08a; margin-bottom: 6px; }
+    .main-banner .banner-step { font-size: 0.85rem; color: #ffffff; opacity: 0.95; background: rgba(0,0,0,0.25); padding: 6px 14px; border-radius: 12px; }
 
     /* MENÚ LATERAL */
     .side-menu-overlay {
@@ -274,11 +274,24 @@
       margin-top: 50px;
       text-align: center;
     }
+    .footer-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+    }
+    .footer-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 6px auto 0;
+      line-height: 1.4;
+    }
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 15px;
+      gap: 15px;
+      margin-top: 18px;
       flex-wrap: wrap;
     }
     .footer-link {
@@ -331,7 +344,6 @@
 
 <header>
   <div class="header-main-row">
-    <!-- LOGO COMPACTO -->
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
@@ -363,7 +375,8 @@
 <div class="banner-container">
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
-    <p>10% OFF por Transferencia | 3 Cuotas Sin Interés</p>
+    <p>10% OFF por Transferencia Bancaria | 3 Cuotas Sin Interés</p>
+    <div class="banner-step">📲 Catálogo Online: armá tu orden y la finalizamos por WhatsApp confirmando stock y link de pago</div>
   </div>
 </div>
 
@@ -407,17 +420,17 @@
   </div>
 </div>
 
-<!-- PIE DE PÁGINA / FOOTER CON ENLACES A IG Y WHATSAPP -->
+<!-- PIE DE PÁGINA / FOOTER NUESTRAS REDES Y EXPLICACIÓN -->
 <footer>
-  <p style="font-weight: 800; color: var(--primary-dark); font-size: 1.1rem;">ALUNEY Skincare & Estética</p>
-  <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Potenciá tu belleza natural con los mejores productos importados.</p>
+  <p class="footer-title">Nuestras Redes</p>
+  <p class="footer-sub">Este sitio funciona como un <b>Catálogo Online</b>. Al armar tu pedido se genera una orden de compra que se envía por WhatsApp para confirmar stock y brindarte el link de pago o datos de transferencia.</p>
   
   <div class="footer-links">
     <a href="https://instagram.com/aluney.estetica" target="_blank" class="footer-link link-ig">
-      📸 Seguinos en Instagram
+      📸 Instagram
     </a>
     <a href="https://wa.me/5491112345678" target="_blank" class="footer-link link-ws">
-      💬 Consultas por WhatsApp
+      💬 WhatsApp Directo
     </a>
   </div>
 </footer>
@@ -431,7 +444,7 @@
 <div id="cart-float-bar" class="cart-float-bar" style="display:none;" onclick="abrirModalCarrito()">
   <div>
     <span id="cart-badge-count" class="cart-badge-count">0</span>
-    <span style="font-weight: bold;">Ver mi Pedido</span>
+    <span style="font-weight: bold;">Ver mi Orden de Compra</span>
   </div>
   <div style="font-size: 1.1rem; font-weight: 800; color: #fef08a;" id="cart-float-total">$ 0</div>
 </div>
@@ -440,10 +453,10 @@
 <div id="modal-carrito" class="modal-overlay" onclick="cerrarModalCarrito(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="cerrarModalCarritoForce()">&times;</button>
-    <h2>🛒 Mi Carrito de Compras</h2>
+    <h2>🛒 Mi Orden de Compra</h2>
     <div id="cart-items-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
     
-    <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
       <div style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: #16a34a;">
         <span>Total Transferencia (-10%):</span>
         <span id="cart-modal-total-transfer">$ 0</span>
@@ -454,7 +467,9 @@
       </div>
     </div>
 
-    <button class="btn-save" onclick="enviarPedidoWhatsApp()">💬 Finalizar Pedido por WhatsApp</button>
+    <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-bottom: 12px;">Al presionar el botón se enviará la orden a WhatsApp para confirmar stock y enviarte el link de pago correspondiente.</p>
+
+    <button class="btn-save" onclick="enviarPedidoWhatsApp()">💬 Enviar Orden por WhatsApp</button>
   </div>
 </div>
 
@@ -539,8 +554,9 @@
         <p style="margin-bottom: 8px;">💸 <b>10% OFF</b> abonando por Transferencia Bancaria.</p>
         <p style="margin-bottom: 8px;">💳 Pagá en <b>3 Cuotas Sin Interés</b> con todas las tarjetas.</p>
         <p style="margin-bottom: 8px;">🚚 Envíos <b>A TODO EL PAÍS</b>.</p>
-        <p style="margin-bottom: 12px;">🛡️ Productos <b>APROBADOS POR ANMAT</b>.</p>
-        <p style="font-size:0.85rem; color:var(--text-muted); italic;">Demora de despacho de 7 días apróx.</p>
+        <p style="margin-bottom: 8px;">🛡️ Productos <b>APROBADOS POR ANMAT</b>.</p>
+        <p style="margin-bottom: 12px; font-size:0.85rem; color:var(--text-muted);">⏱️ Demora de despacho de 7 días apróx.</p>
+        <p style="padding: 8px; background: #f1f5f9; border-radius: 6px; font-size: 0.85rem;">📲 <b>¿Cómo comprar?</b> La web funciona como catálogo online: agregás tus productos al carrito, generás tu orden y la enviás por WhatsApp donde confirmamos el stock y te pasamos el link de pago o CBU.</p>
       `;
     } else if (tipo === 'contacto') {
       titulo.innerText = "📞 Contacto";
@@ -577,9 +593,17 @@
     renderizarCarritoModal();
   }
 
+  function obtenerPrecioNumerico(p) {
+    let raw = p.lista !== undefined ? p.lista : (p.precio !== undefined ? p.precio : 0);
+    if (typeof raw === 'string') {
+      raw = raw.replace(/\./g, '').replace(',', '.').replace(/[^0-9.]/g, '');
+    }
+    return parseFloat(raw) || 0;
+  }
+
   function actualizarBarraCarrito() {
     const totalItems = carritoProductos.reduce((acc, item) => acc + item.cantidad, 0);
-    const totalLista = carritoProductos.reduce((acc, item) => acc + ((item.lista || item.precio || 0) * item.cantidad), 0);
+    const totalLista = carritoProductos.reduce((acc, item) => acc + (obtenerPrecioNumerico(item) * item.cantidad), 0);
     const totalTransfer = Math.round(totalLista * 0.90);
 
     const bar = document.getElementById('cart-float-bar');
@@ -611,7 +635,7 @@
 
     let totalLista = 0;
     container.innerHTML = carritoProductos.map(item => {
-      const precioUnitario = (item.lista || item.precio || 0);
+      const precioUnitario = obtenerPrecioNumerico(item);
       const subtotal = precioUnitario * item.cantidad;
       totalLista += subtotal;
       return `
@@ -637,11 +661,11 @@
     if (carritoProductos.length === 0) return alert("Agrega productos al carrito primero.");
     
     let clienteTxt = usuarioActual ? `Cliente: ${usuarioActual.nombre}\nContacto: ${usuarioActual.contacto}\n` : '';
-    let detalle = `¡Hola ${tiendaUrl.toUpperCase()}!\n${clienteTxt}Quisiera realizar el siguiente pedido:\n\n`;
+    let detalle = `¡Hola ${tiendaUrl.toUpperCase()}!\n${clienteTxt}Quisiera consultar stock y confirmar la siguiente orden de compra:\n\n`;
 
     let totalLista = 0;
     carritoProductos.forEach(item => {
-      const sub = (item.lista || item.precio || 0) * item.cantidad;
+      const sub = obtenerPrecioNumerico(item) * item.cantidad;
       totalLista += sub;
       detalle += `• ${item.cantidad}x ${item.nombre} - $ ${sub.toLocaleString('es-AR')}\n`;
     });
@@ -649,7 +673,7 @@
     const totalTransfer = Math.round(totalLista * 0.90);
     detalle += `\n*TOTAL TRANSFERENCIA (-10%): $ ${totalTransfer.toLocaleString('es-AR')}*`;
     detalle += `\nTotal Tarjeta / Lista: $ ${totalLista.toLocaleString('es-AR')}`;
-    detalle += `\n\n¿Me confirman datos para abonar?`;
+    detalle += `\n\n¿Me confirman stock para enviarme el link de pago o datos de transferencia?`;
 
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(detalle)}`, '_blank');
   }
@@ -754,7 +778,7 @@
     filtrarProductos();
   }
 
-  /* FILTRADO Y ORDENADO POR PRECIO */
+  /* FILTRADO Y ORDENADO POR PRECIO ROBUSTO */
   function filtrarProductos() {
     const query = document.getElementById('input-search').value.toLowerCase().trim();
     const modoOrden = document.getElementById('select-sort').value;
@@ -773,9 +797,9 @@
     });
 
     if (modoOrden === 'precio-menor') {
-      filtrados.sort((a, b) => (a.lista || a.precio || 0) - (b.lista || b.precio || 0));
+      filtrados.sort((a, b) => obtenerPrecioNumerico(a) - obtenerPrecioNumerico(b));
     } else if (modoOrden === 'precio-mayor') {
-      filtrados.sort((a, b) => (b.lista || b.precio || 0) - (a.lista || a.precio || 0));
+      filtrados.sort((a, b) => obtenerPrecioNumerico(b) - obtenerPrecioNumerico(a));
     }
 
     renderizarGrid(filtrados);
@@ -792,7 +816,7 @@
       const disponible = (p.stock === undefined || p.stock > 0);
       const esFav = listaFavoritos.includes(p.id);
       
-      const precioBaseNum = (p.lista || p.precio || 0);
+      const precioBaseNum = obtenerPrecioNumerico(p);
       const precioTransfNum = Math.round(precioBaseNum * 0.90);
 
       const precioBaseStr = precioBaseNum.toLocaleString('es-AR');
@@ -871,7 +895,7 @@
   }
 
   function cerrarLightbox(e) { if (e.target.id === 'modal-overlay') cerrarLightboxForce(); }
-  function cerrarLightboxForce() { document.getElementById('lightbox-overlay').classList.remove('active'); }
+  function cerrarLightboxForce() { document.getElementById('modal-overlay').classList.remove('active'); }
 </script>
 
 </body>
