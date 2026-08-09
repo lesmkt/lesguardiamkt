@@ -22,7 +22,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA Y LOGO EQUILIBRADO */
+    /* CABECERA COMPACTA SIN ESPACIO BLANCO SOBRANTE */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -30,7 +30,7 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      padding: 10px 0;
+      padding: 5px 0 10px 0; /* Padding reducido al mínimo */
     }
     
     .header-main-row {
@@ -40,7 +40,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-logo-container {
@@ -49,17 +49,18 @@
       align-items: center;
       width: 100%;
       text-decoration: none;
+      padding: 0;
     }
     
-    /* LOGO CON TAMAÑO MÁXIMO PROPORCIONADO */
+    /* LOGO AJUSTADO SIN MÁRGENES EXTRA */
     .brand-logo-img {
-      height: 90px !important;
-      max-height: 110px !important;
+      height: 180px !important;
+      max-height: 220px !important;
       width: auto !important;
-      max-width: 90vw;
+      max-width: 95vw;
       object-fit: contain;
       display: block;
-      transition: transform 0.2s ease;
+      margin: 0 auto;
     }
 
     .header-actions {
@@ -164,7 +165,7 @@
     .sub-menu-item { padding: 8px 10px; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; border-radius: 6px; }
     .sub-menu-item:hover { color: var(--primary); background: #f8fafc; }
 
-    /* CONTENEDOR DE PRODUCTOS Y TARJETAS */
+    /* CONTENEDOR DE PRODUCTOS */
     .container { max-width: 1100px; margin: 25px auto; padding: 0 20px; }
     
     .grid-products {
@@ -196,30 +197,15 @@
     .card-body { padding: 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 12px; }
     .product-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; color: var(--text); min-height: 2.6em; }
     
-    /* BLOQUE DE PRECIO DE TRANSFERENCIA BIEN VISIBLE */
+    /* BLOQUE DE PRECIOS REORDENADO */
     .price-box {
-      background: #f8fafc;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
-    .price-transfer-badge {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #15803d;
-      background: var(--success-bg);
-      padding: 3px 8px;
-      border-radius: 4px;
-      display: inline-block;
-      width: fit-content;
-      text-transform: uppercase;
-    }
-    .price-transfer-amount { font-size: 1.35rem; font-weight: 800; color: #16a34a; line-height: 1.1; margin-top: 2px; }
-    .price-list-amount { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-decoration: line-through; }
-    .price-installment-text { font-size: 0.8rem; color: var(--primary); font-weight: 600; margin-top: 2px; }
+    .price-main-amount { font-size: 1.35rem; font-weight: 800; color: var(--text); }
+    .price-installment-text { font-size: 0.82rem; color: var(--primary); font-weight: 600; margin-bottom: 4px; }
+    .price-transfer-text { font-size: 0.9rem; font-weight: 700; color: #16a34a; }
 
     .btn-add-cart {
       width: 100%; background: var(--primary); color: white; border: none;
@@ -279,7 +265,7 @@
 
 <header>
   <div class="header-main-row">
-    <!-- LOGO PROPORCIONADO -->
+    <!-- LOGO SIN ESPACIOS SOBRANTES -->
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
@@ -302,7 +288,7 @@
 <div class="banner-container">
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
-    <p>10% OFF en Transferencias | 3 Cuotas Sin Interés</p>
+    <p>10% OFF por Transferencia | 3 Cuotas Sin Interés</p>
   </div>
 </div>
 
@@ -368,7 +354,7 @@
         <span id="cart-modal-total-transfer">$ 0</span>
       </div>
       <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
-        <span>Total Lista (o 3 Cuotas):</span>
+        <span>Total Tarjeta (o 3 Cuotas):</span>
         <span id="cart-modal-total-lista">$ 0</span>
       </div>
     </div>
@@ -556,7 +542,7 @@
 
     const totalTransfer = Math.round(totalLista * 0.90);
     detalle += `\n*TOTAL TRANSFERENCIA (-10%): $ ${totalTransfer.toLocaleString('es-AR')}*`;
-    detalle += `\nTotal Lista (o 3 Cuotas): $ ${totalLista.toLocaleString('es-AR')}`;
+    detalle += `\nTotal Tarjeta / Lista: $ ${totalLista.toLocaleString('es-AR')}`;
     detalle += `\n\n¿Me confirman datos para abonar?`;
 
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(detalle)}`, '_blank');
@@ -681,6 +667,7 @@
     renderizarGrid(filtrados);
   }
 
+  /* RENDER DE TARJETAS DE PRODUCTO SEGÚN EL ORDEN DE PRECIOS SOLICITADO */
   function renderizarGrid(lista) {
     const grid = document.getElementById('grid-productos');
     if (lista.length === 0) {
@@ -692,12 +679,12 @@
       const disponible = (p.stock === undefined || p.stock > 0);
       const esFav = listaFavoritos.includes(p.id);
       
-      const precioListaNum = (p.lista || p.precio || 0);
-      const precioTransfNum = Math.round(precioListaNum * 0.90);
+      const precioBaseNum = (p.lista || p.precio || 0);
+      const precioTransfNum = Math.round(precioBaseNum * 0.90);
 
-      const precioListaStr = precioListaNum.toLocaleString('es-AR');
+      const precioBaseStr = precioBaseNum.toLocaleString('es-AR');
       const precioTransfStr = precioTransfNum.toLocaleString('es-AR');
-      const cuotaMontoStr = Math.round(precioListaNum / (p.cuotas || 3)).toLocaleString('es-AR');
+      const cuotaMontoStr = Math.round(precioBaseNum / (p.cuotas || 3)).toLocaleString('es-AR');
       
       const fotos = (p.imagenes && p.imagenes.length) ? p.imagenes : [(p.imagen_url || p.imagen || p.img || '')];
       const fotoPrincipal = fotos[0] || 'https://via.placeholder.com/300?text=Sin+Foto';
@@ -717,13 +704,14 @@
             <div class="product-title">${p.nombre}</div>
             
             <div class="price-box">
-              <span class="price-transfer-badge">10% OFF Transferencia</span>
-              <div class="price-transfer-amount">$ ${precioTransfStr}</div>
-              <div style="margin-top: 2px;">
-                <span style="font-size:0.75rem; color:var(--text-muted);">Lista: </span>
-                <span class="price-list-amount">$ ${precioListaStr}</span>
-              </div>
-              <div class="price-installment-text">${p.cuotas || 3} cuotas de $ ${cuotaMontoStr}</div>
+              <!-- 1. PRECIO PRINCIPAL (SÓLO EL MONTO) -->
+              <div class="price-main-amount">$ ${precioBaseStr}</div>
+              
+              <!-- 2. CUOTAS SIN INTERÉS DEBAJO -->
+              <div class="price-installment-text">${p.cuotas || 3} cuotas sin interés de $ ${cuotaMontoStr}</div>
+              
+              <!-- 3. PRECIO POR TRANSFERENCIA EN VERDE CON 10% OFF -->
+              <div class="price-transfer-text">$ ${precioTransfStr} pagando por transferencia (10% OFF)</div>
             </div>
 
             ${disponible 
