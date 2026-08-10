@@ -24,7 +24,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA COMPACTA SIN ESPACIOS BLANCOS EXCESIVOS */
+    /* CABECERA CON LOGO GRANDE Y DISEÑO COMPACTO */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -32,7 +32,7 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 10px rgba(139, 92, 246, 0.08);
-      padding: 4px 0 8px 0;
+      padding: 5px 0 10px 0; /* Un poco más de padding inferior para el logo grande */
     }
     
     .header-main-row {
@@ -42,7 +42,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .brand-logo-container {
@@ -56,8 +56,8 @@
     }
     
     .brand-logo-img {
-      height: 85px !important;
-      max-height: 95px !important;
+      height: 150px !important; /* LOGO MÁS GRANDE */
+      max-height: 160px !important;
       width: auto !important;
       max-width: 90vw;
       object-fit: contain;
@@ -122,7 +122,7 @@
       cursor: pointer;
     }
 
-    /* BANNER INICIAL EN CÓDIGO (SIN IMAGEN EXTERNA) */
+    /* BANNER ULTRA FINO Y SIMPLE (SÓLO CÓDIGO) */
     .banner-container {
       max-width: 1100px;
       margin: 12px auto 0;
@@ -130,8 +130,8 @@
     }
     .main-banner {
       width: 100%;
-      min-height: 180px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.95) 0%, rgba(124, 58, 237, 1) 100%);
+      min-height: auto; /* MÁS FINO */
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.98) 0%, rgba(124, 58, 237, 1) 100%);
       border-radius: var(--radius);
       display: flex;
       flex-direction: column;
@@ -139,21 +139,23 @@
       align-items: center;
       color: white;
       text-align: center;
-      padding: 22px 18px;
-      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+      padding: 15px 18px; /* MENOS PADDING PARA SER MÁS FINO */
+      box-shadow: 0 6px 15px rgba(139, 92, 246, 0.15);
       border: 2px solid #fde047;
     }
-    .main-banner h2 { font-size: 1.6rem; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    .main-banner p { font-size: 0.98rem; font-weight: 700; color: #fef08a; margin-bottom: 8px; }
+    .main-banner h2 { font-size: 1.4rem; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .main-banner p { font-size: 0.95rem; font-weight: 700; color: #fef08a; margin-bottom: 6px; }
     .main-banner .banner-step { 
-      font-size: 0.85rem; 
+      font-size: 0.8rem; 
       color: #ffffff; 
       opacity: 0.95; 
-      background: rgba(15, 23, 42, 0.35); 
-      padding: 6px 14px; 
-      border-radius: 12px; 
+      background: rgba(15, 23, 42, 0.3); 
+      padding: 5px 12px; 
+      border-radius: 10px; 
       backdrop-filter: blur(4px); 
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      line-height: 1.3;
+      max-width: 95%;
     }
 
     /* MENÚ LATERAL */
@@ -334,7 +336,7 @@
   <div class="main-banner">
     <h2>✨ ALUNEY Skincare & Estética</h2>
     <p>10% OFF por Transferencia Bancaria | 3 Cuotas Sin Interés</p>
-    <div class="banner-step">📲 Catálogo Online: armá tu orden y la finalizamos por WhatsApp confirmando stock y link de pago</div>
+    <div class="banner-step">📲 Nuestra web funciona como Catálogo Online: Cargá tu carrito, generá tu orden de compra, te confirmamos el stock por whatsapp y te enviamos el link de pago, así de facil!!</div>
   </div>
 </div>
 
