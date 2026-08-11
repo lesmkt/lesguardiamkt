@@ -24,54 +24,60 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* CABECERA CON LOGO GRANDE Y DISEÑO COMPACTO */
+    /* ESTRUCTURA DE CABECERA MEJORADA: LOGO DESPLAZABLE + BARRA FIJA */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.08);
-      padding: 5px 0 10px 0; /* Un poco más de padding inferior para el logo grande */
+      padding: 10px 0 0 0;
     }
-    
-    .header-main-row {
+
+    .logo-row {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 15px;
+      padding: 0 15px 8px 15px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
     }
 
     .brand-logo-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
       text-decoration: none;
-      padding: 0;
-      margin: 0;
     }
-    
+
     .brand-logo-img {
-      height: 150px !important; /* LOGO MÁS GRANDE */
-      max-height: 160px !important;
+      height: 180px !important; /* LOGO MÁS GRANDE */
+      max-height: 200px !important;
       width: auto !important;
       max-width: 90vw;
       object-fit: contain;
       display: block;
-      margin: 0 auto;
+    }
+
+    /* BARRA DE ACCIONES Y BUSCADOR SIEMPRE VISIBLE AL HACER SCROLL */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.08);
     }
 
     .header-actions {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 15px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       width: 100%;
-      max-width: 850px;
       flex-wrap: wrap;
     }
 
@@ -87,7 +93,7 @@
     }
     .btn-menu-toggle:hover { background: #ede9fe; }
 
-    .search-box { flex: 1; min-width: 150px; }
+    .search-box { flex: 1; min-width: 160px; }
     .search-box input {
       width: 100%;
       padding: 8px 16px;
@@ -122,15 +128,15 @@
       cursor: pointer;
     }
 
-    /* BANNER ULTRA FINO Y SIMPLE (SÓLO CÓDIGO) */
+    /* BANNER PROMOCIONAL INICIAL ULTRA FINO */
     .banner-container {
       max-width: 1100px;
-      margin: 12px auto 0;
+      margin: 15px auto 0;
       padding: 0 15px;
     }
     .main-banner {
       width: 100%;
-      min-height: auto; /* MÁS FINO */
+      min-height: auto;
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.98) 0%, rgba(124, 58, 237, 1) 100%);
       border-radius: var(--radius);
       display: flex;
@@ -139,7 +145,7 @@
       align-items: center;
       color: white;
       text-align: center;
-      padding: 15px 18px; /* MENOS PADDING PARA SER MÁS FINO */
+      padding: 15px 18px;
       box-shadow: 0 6px 15px rgba(139, 92, 246, 0.15);
       border: 2px solid #fde047;
     }
@@ -195,7 +201,7 @@
     .sub-menu-item { padding: 8px 10px; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; border-radius: 6px; }
     .sub-menu-item:hover { color: var(--primary-dark); background: var(--primary-light); }
 
-    /* CONTENEDOR DE PRODUCTOS */
+    /* CONTENEDOR DE PRODUCTOS Y TARJETAS */
     .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
     
     .grid-products {
@@ -305,32 +311,34 @@
 <body>
 
 <header>
-  <div class="header-main-row">
+  <div class="logo-row">
     <a href="#" class="brand-logo-container">
       <img id="img-logo-tienda" class="brand-logo-img" src="logo.png" alt="ALUNEY" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1A1_FAu-ueAj4T7ATdxvyeV36oipAytuw';">
     </a>
-
-    <div class="header-actions">
-      <button class="btn-menu-toggle" onclick="toggleSideMenu()">☰ Menú</button>
-      
-      <div class="search-box">
-        <input type="text" id="input-search" placeholder="Buscar productos..." oninput="filtrarProductos()">
-      </div>
-
-      <div class="sort-box">
-        <select id="select-sort" onchange="filtrarProductos()">
-          <option value="relevancia">Ordenar por</option>
-          <option value="precio-menor">Precio: Menor a Mayor</option>
-          <option value="precio-mayor">Precio: Mayor a Menor</option>
-        </select>
-      </div>
-      
-      <button class="btn-user" onclick="abrirModalLogin()" id="btn-login-header">
-        👤 <span id="txt-login-header">Ingresar</span>
-      </button>
-    </div>
   </div>
 </header>
+
+<div class="sticky-bar">
+  <div class="header-actions">
+    <button class="btn-menu-toggle" onclick="toggleSideMenu()">☰ Menú</button>
+    
+    <div class="search-box">
+      <input type="text" id="input-search" placeholder="Buscar productos..." oninput="filtrarProductos()">
+    </div>
+
+    <div class="sort-box">
+      <select id="select-sort" onchange="filtrarProductos()">
+        <option value="relevancia">Ordenar por</option>
+        <option value="precio-menor">Precio: Menor a Mayor</option>
+        <option value="precio-mayor">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+    
+    <button class="btn-user" onclick="abrirModalLogin()" id="btn-login-header">
+      👤 <span id="txt-login-header">Ingresar</span>
+    </button>
+  </div>
+</div>
 
 <div class="banner-container">
   <div class="main-banner">
